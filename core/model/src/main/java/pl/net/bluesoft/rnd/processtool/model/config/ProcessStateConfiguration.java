@@ -3,6 +3,7 @@ package pl.net.bluesoft.rnd.processtool.model.config;
 import pl.net.bluesoft.rnd.processtool.model.PersistentEntity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,13 +12,15 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name="pt_process_state_configuration")
+@Table(name = "pt_process_state_config")
 public class ProcessStateConfiguration extends PersistentEntity {
 	private String name;
     @Column(length = 2048)
 	private String description;
     @Column(length = 2048)
     private String commentary;
+
+    private Boolean enableManualSave;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="state_id")
@@ -32,14 +35,25 @@ public class ProcessStateConfiguration extends PersistentEntity {
     @JoinColumn(name="state_id")
     private Set<ProcessStatePermission> permissions = new HashSet();
 
+//    @XmlTransient
 	@ManyToOne
 	@JoinColumn(name="definition_id")
 	private ProcessDefinitionConfig definition;
 
+    public Boolean getEnableManualSave() {
+        return enableManualSave;
+    }
+
+    public void setEnableManualSave(Boolean enableManualSave) {
+        this.enableManualSave = enableManualSave;
+    }
+
+    @XmlTransient
 	public ProcessDefinitionConfig getDefinition() {
 		return definition;
 	}
 
+//    @XmlTransient
 	public void setDefinition(ProcessDefinitionConfig definition) {
 		this.definition = definition;
 	}

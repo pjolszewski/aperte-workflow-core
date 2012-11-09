@@ -1,9 +1,9 @@
 package pl.net.bluesoft.rnd.processtool.model.config;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import pl.net.bluesoft.rnd.processtool.model.PersistentEntity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,10 +16,12 @@ import static pl.net.bluesoft.util.lang.FormatUtil.nvl;
 @Entity
 @Table(name="pt_process_state_widget")
 public class ProcessStateWidget extends PersistentEntity {
+//    @XmlTransient
 	@ManyToOne
 	@JoinColumn(name="state_id")
 	private ProcessStateConfiguration config;
 
+//    @XmlTransient
 	@ManyToOne
 	@JoinColumn(name="parent_id")
 	private ProcessStateWidget parent;
@@ -42,6 +44,10 @@ public class ProcessStateWidget extends PersistentEntity {
     private Boolean optional;
 	private Integer priority = Integer.valueOf(0);
 
+    private String generateFromCollection;
+	@Transient
+	private String generatorKey;
+
     public String getClassName() {
 		return className;
 	}
@@ -50,10 +56,12 @@ public class ProcessStateWidget extends PersistentEntity {
 		this.className = className;
 	}
 
+    @XmlTransient
 	public ProcessStateWidget getParent() {
 		return parent;
 	}
 
+//    @XmlTransient
 	public void setParent(ProcessStateWidget parent) {
 		this.parent = parent;
 	}
@@ -76,10 +84,12 @@ public class ProcessStateWidget extends PersistentEntity {
 		this.attributes = attributes;
 	}
 
+    @XmlTransient
 	public ProcessStateConfiguration getConfig() {
 		return config;
 	}
 
+//    @XmlTransient
 	public void setConfig(ProcessStateConfiguration config) {
 		this.config = config;
 	}
@@ -116,5 +126,21 @@ public class ProcessStateWidget extends PersistentEntity {
 
     public void setOptional(Boolean optional) {
         this.optional = optional;
+    }
+
+    public String getGeneratorKey() {
+		return generatorKey;
+	}
+
+	public void setGeneratorKey(String generatorKey) {
+		this.generatorKey = generatorKey;
+	}
+
+	public String getGenerateFromCollection() {
+		return generateFromCollection;
+	}
+
+	public void setGenerateFromCollection(String generateFromCollection) {
+		this.generateFromCollection = generateFromCollection;
     }
 }
