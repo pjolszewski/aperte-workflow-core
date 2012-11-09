@@ -44,10 +44,11 @@ public class ApplicationPortlet2WithLoadingMessage extends ApplicationPortlet2
 	protected void handleRequest(PortletRequest request, PortletResponse response) throws PortletException, IOException
 	{
 		super.handleRequest(request,response);
-		
-		for(Window window: application.getWindows())
-		{
-			window.executeJavaScript("hideLoadingMessage('"+getLoaderTagId(request.getWindowID(), getPortletConfig())+"');");
+
+		if (application != null) {
+			for(Window window: application.getWindows()) {
+				window.executeJavaScript("hideLoadingMessage('"+getLoaderTagId(request.getWindowID(), getPortletConfig())+"');");
+			}
 		}
 	}
 
