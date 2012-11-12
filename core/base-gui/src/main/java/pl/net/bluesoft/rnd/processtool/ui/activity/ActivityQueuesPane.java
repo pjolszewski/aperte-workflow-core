@@ -183,13 +183,15 @@ public class ActivityQueuesPane extends Panel implements VaadinUtility.Refreshab
 	private void buildMainTasksViews(ProcessToolContext ctx, final ProcessToolBpmSession bpmSession, UserData user)
 	{
 		/* Create filters for specific task list */
-		ProcessInstanceFilter assignedTasksFromOthers = filterFactory.createOthersTaskAssignedToMeFilter(user);
-		ProcessInstanceFilter assignedTasksByMyself = filterFactory.createMyTasksAssignedToMeFilter(user);
+//		ProcessInstanceFilter assignedTasksFromOthers = filterFactory.createOthersTaskAssignedToMeFilter(user);
+//		ProcessInstanceFilter assignedTasksByMyself = filterFactory.createMyTasksAssignedToMeFilter(user);
+		ProcessInstanceFilter tasksAssignedToMe = filterFactory.createTaskAssignedToMeFilter(user);
 		ProcessInstanceFilter myTasksBeingDoneByOthers = filterFactory.createMyTaskDoneByOthersFilter(user);
 		ProcessInstanceFilter myTasksClosed = filterFactory.createMyClosedTasksFilter(user);
 				
-		taskList.addComponent(createUserTasksButton(bpmSession,ctx,assignedTasksFromOthers,true));
-		taskList.addComponent(createUserTasksButton(bpmSession,ctx,assignedTasksByMyself,true));
+//		taskList.addComponent(createUserTasksButton(bpmSession,ctx,assignedTasksFromOthers,true));
+//		taskList.addComponent(createUserTasksButton(bpmSession,ctx,assignedTasksByMyself,true));
+		taskList.addComponent(createUserTasksButton(bpmSession,ctx,tasksAssignedToMe,true));
 		taskList.addComponent(createUserTasksButton(bpmSession,ctx,myTasksBeingDoneByOthers,true));
 		taskList.addComponent(createUserTasksButton(bpmSession,ctx,myTasksClosed,false));
 
@@ -240,8 +242,9 @@ public class ActivityQueuesPane extends Panel implements VaadinUtility.Refreshab
 	{
 		Collection<ProcessInstanceFilter> taskFilters = new ArrayList<ProcessInstanceFilter>();
 		
-		taskFilters.add(filterFactory.createSubstitutedOthersTaskAssignedToMeFilter(substitutedUser));
-		taskFilters.add(filterFactory.createSubstitutedTasksAssignedToMeFilter(substitutedUser));
+//		taskFilters.add(filterFactory.createSubstitutedOthersTaskAssignedToMeFilter(substitutedUser));
+//		taskFilters.add(filterFactory.createSubstitutedTasksAssignedToMeFilter(substitutedUser));
+		taskFilters.add(filterFactory.createTasksAssignedToSubstitutedUserFilter(substitutedUser));
 		taskFilters.add(filterFactory.createSubstitutedTaskDoneByOthersFilter(substitutedUser));
 		taskFilters.add(filterFactory.createSubstitutedClosedTasksFilter(substitutedUser));
 		

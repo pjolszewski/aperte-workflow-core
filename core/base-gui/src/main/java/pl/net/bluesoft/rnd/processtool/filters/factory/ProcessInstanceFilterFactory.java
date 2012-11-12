@@ -25,13 +25,19 @@ public class ProcessInstanceFilterFactory
 	/** Methods creates new filter which returns tasks created by other users, but assigned to given user */
 	public ProcessInstanceFilter createOthersTaskAssignedToMeFilter(UserData user)
 	{
-		return getProcessInstanceFilter(user,null,user,"activity.assigned.tasks", QueueType.OTHERS_ASSIGNED);
+		return getProcessInstanceFilter(user,null,user,"activity.assigned.tasks", QueueType.ASSIGNED_TO_CURRENT_USER);
 	}
 	
 	/** Methods creates new filter which returns tasks created by given user and assigned to him */
 	public ProcessInstanceFilter createMyTasksAssignedToMeFilter(UserData user)
 	{
-		return getProcessInstanceFilter(user,user,user,"activity.created.assigned.tasks", QueueType.OWN_ASSIGNED);
+		return getProcessInstanceFilter(user,user,user,"activity.created.assigned.tasks", QueueType.ASSIGNED_TO_CURRENT_USER);
+	}
+
+	/** Methods creates new filter which returns tasks assigned to given user */
+	public ProcessInstanceFilter createTaskAssignedToMeFilter(UserData user)
+	{
+		return getProcessInstanceFilter(user,null,user,"activity.assigned.tasks", QueueType.ASSIGNED_TO_CURRENT_USER);
 	}
 	
 	/** Methods creates new filter which returns user closed tasks */
@@ -56,13 +62,19 @@ public class ProcessInstanceFilterFactory
 	/** Methods creates new filter which returns tasks created by other users, but assigned to given user */
 	public ProcessInstanceFilter createSubstitutedOthersTaskAssignedToMeFilter(UserData substitutedUser)
 	{
-		return getProcessInstanceFilter(substitutedUser,null,substitutedUser,"activity.subst.assigned.tasks", QueueType.OTHERS_ASSIGNED);
+		return getProcessInstanceFilter(substitutedUser,null,substitutedUser,"activity.subst.assigned.tasks", QueueType.ASSIGNED_TO_CURRENT_USER);
 	}
 	
 	/** Methods creates new filter which returns tasks created by given user and assigned to him */
 	public ProcessInstanceFilter createSubstitutedTasksAssignedToMeFilter(UserData substitutedUser)
 	{
-		return getProcessInstanceFilter(substitutedUser,substitutedUser,substitutedUser,"activity.subst.created.assigned.tasks", QueueType.OWN_ASSIGNED);
+		return getProcessInstanceFilter(substitutedUser,substitutedUser,substitutedUser,"activity.subst.created.assigned.tasks", QueueType.ASSIGNED_TO_CURRENT_USER);
+	}
+
+	/** Methods creates new filter which returns tasks assigned to given user */
+	public ProcessInstanceFilter createTasksAssignedToSubstitutedUserFilter(UserData substitutedUser)
+	{
+		return getProcessInstanceFilter(substitutedUser,null,substitutedUser,"activity.subst.assigned.tasks", QueueType.ASSIGNED_TO_CURRENT_USER);
 	}
 	
 	/** Methods creates new filter which returns user closed tasks */
@@ -78,7 +90,7 @@ public class ProcessInstanceFilterFactory
 				null,
 				substitutedUser,
 				"activity.other.users.tasks",
-				QueueType.OTHERS_ASSIGNED);
+				QueueType.ASSIGNED_TO_CURRENT_USER);
 	}
 	
 	private ProcessInstanceFilter getProcessInstanceFilterForQueue(UserData user, ProcessQueue processQueue)

@@ -94,10 +94,8 @@ public class UserProcessQueuesSizeProvider
 		UsersQueuesSize userQueueSize = new UsersQueuesSize(currentUserLogin);
 		
 		/* Create organized tasks filters */
-		queuesFilters.add(filterFactory.createMyTasksAssignedToMeFilter(user));
+		queuesFilters.add(filterFactory.createTaskAssignedToMeFilter(user));
 		queuesFilters.add(filterFactory.createMyTaskDoneByOthersFilter(user));
-		queuesFilters.add(filterFactory.createOthersTaskAssignedToMeFilter(user));
-		
 		
 		for(ProcessInstanceFilter queueFilter: queuesFilters)
 		{
@@ -132,8 +130,8 @@ public class UserProcessQueuesSizeProvider
 		
 		UsersQueuesSize userQueueSize = new UsersQueuesSize(currentUserLogin);
 		
-		queuesFilters.add(filterFactory.createSubstitutedTasksAssignedToMeFilter(user));
-		queuesFilters.add(filterFactory.createSubstitutedOthersTaskAssignedToMeFilter(user));
+		queuesFilters.add(filterFactory.createTasksAssignedToSubstitutedUserFilter(user));
+//		queuesFilters.add(filterFactory.createSubstitutedOthersTaskAssignedToMeFilter(user));
 		
 		
 		for(ProcessInstanceFilter queueFilter: queuesFilters)
